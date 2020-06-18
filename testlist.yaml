@@ -1,0 +1,64 @@
+#
+# Digest Algorithms examples.
+#
+sha256: &sha256
+  algorithm: sha256
+  parameters: {}
+  value: 4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=
+id-sha-512: &id-sha-512
+  algorithm: id-sha-512
+  parameters: {}
+  value: |-
+    WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrIiYllu7BNNyealdVLvRwE
+
+      mTHWXvJwew==
+test-checksum-ok:
+-   name: single
+    algorithm:
+      <<: *sha256
+    bytes: '{"hello": "world"}'
+    content-coding: br
+    expected: >-
+      4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=
+-   name: single-512
+    algorithm:
+      <<: *id-sha-512
+    bytes: '{"hello": "world"}'
+    content-coding: br
+    expected: 'WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrIiYllu7BNNyealdVLvRwE
+
+      mTHWXvJwew=='
+test-parse-ok:
+  - name: single
+    field_value: >-
+      sha256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=
+    expected:
+    - <<: *sha256
+  - name: multiple_nospace
+    field_value: >-
+      sha256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,id-sha-512=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==
+    expected:
+    - *sha256
+    - *id-sha-512
+  - name: multiple_space
+    field_value: >-
+      sha256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,
+      id-sha-512=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==
+    expected:
+    - *sha256
+    - *id-sha-512
+  - name: multiple_parameters
+    field_value: >-
+      bs=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=;limit=8,
+      bs=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==;limit=8;offset=8
+    expected:
+    - algorithm: bs
+      parameters:
+        limit: '8'
+      value: 4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=
+    - algorithm: bs
+      parameters:
+        limit: '8'
+        offset: '8'
+      value: >-
+        WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm+AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==

@@ -1,50 +1,44 @@
-:warning: [removeme] Questo file è stato creato seguendo il  [README starter kit](https://github.com/italia/readme-starterkit) [removeme] :warning:
 
-[![License](https://img.shields.io/github/license/italia/bootstrap-italia.svg)](https://github.com/italia/bootstrap-italia/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/italia/bootstrap-italia.svg)](https://github.com/italia/bootstrap-italia/issues)
-[![Join the #design channel](https://img.shields.io/badge/Slack%20channel-%23design-blue.svg)](https://developersitalia.slack.com/messages/C7VPAUVB3/)
-[![Get invited](https://slack.developers.italia.it/badge.svg)](https://slack.developers.italia.it/)
-[![18app on forum.italia.it](https://img.shields.io/badge/Forum-18app-blue.svg)](https://forum.italia.it/c/18app-carta-docente)
+[![License](https://img.shields.io/github/license/ioggstream/digest-headers.svg)](https://github.com/ioggstream/digest-headers/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/ioggstream/digest-headers.svg)](https://github.com/ioggstream/digest-headers/issues)
 
-# Titolo
+# Digest Headers parser
 
-> Sottotitolo / Slogan / Descrizione breve
+> A python implementation of digest fields defined in [Digest Fields](https://github.com/httpwg/http-extensions/blob/master/draft-ietf-httpbis-digest-headers.md)
 
-*Read this in other languages: [English](README.EN.md).*
 
-## Immagini e GIF
+# Index
 
-![Recordit GIF](http://g.recordit.co/iLN6A0vSD8.gif)
-
-# Indice
-
-- [Come iniziare](#come-iniziare)
-- [Come contribuire](#come-contribuire)
-- [Manutenzione](#manutenzione)
+- [Quickstart](#quickstart)
+- [Contribute](#contribute)
 - [Licenza](#licenza)
 
-# Come iniziare
+# Quickstart
 
-## Come installare
+```python
 
-## Documentazione
+import digest
+import json
 
-# Come contribuire
+expected_field_value = "id-sha-256=..., sha-512=..."
+representation_data = b'{"hello": "world"}'
 
-## Community
+field_value = digest.create(representation_data, digest_algorithm="sha-256")
+assert field_value == 
 
-### Code of conduct
 
-### Responsible Disclosure
+```
 
-### Segnalazione bug e richieste di aiuto
+# Contribute
 
-# Manutenzione 
+Join the discussion on the HTTP Workgroup mailing list or 
+the https://github.com/httpwg/http-extensions github repo.
 
-# Licenza 
+### Issues
 
-## Licenza generale 
+Issues can be opened on [![GitHub issues](https://img.shields.io/github/issues/ioggstream/digest-headers.svg)](https://github.com/ioggstream/digest-headers/issues)
 
-## Autori e Copyright
 
-## Licenze software dei componenti di terze parti
+# License 
+
+BSD-3-Clause
