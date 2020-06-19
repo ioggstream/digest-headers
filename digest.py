@@ -15,6 +15,7 @@ def sha256_algorithm(*a, **k):
 def sha512_algorithm(*a, **k):
     return base64.encodebytes(hashlib.sha512(*a, **k).digest())
 
+
 DIGEST_ALGORITHMS = {
     'sha256': sha256_algorithm,
     'id-sha-512': sha512_algorithm,
